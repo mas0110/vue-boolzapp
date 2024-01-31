@@ -1,5 +1,15 @@
-.container{
+body{
+    background-image: linear-gradient(
+        to bottom,
+        #009688 0px,
+        #009688 15vh,
+        #DBDBD3 15vh,
+        #DBDBD3 100%
+    );
     height: 100vh;
+}
+#app{
+    height: 95%;
 }
 
 img{
@@ -8,13 +18,19 @@ img{
     border-radius: 50%;
 }
 
-.fa-bell-slash{
-    border: 1px;
-    background-color: white;
-    color: aqua;
+#bell{
+    width: 45px;
     aspect-ratio: 1;
-    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
     border-radius: 50%;
+}
+
+.ultimo-mex{
+    font-size: 12px;
+    color: #B1B1B1;
 }
 
 i{
@@ -26,4 +42,23 @@ i{
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.sent,
+.received{
+    width: 35%;
+}
+
+.sent span,
+.received span{
+    position: absolute;
+    bottom: 5px;
+    right: 10px;
+    font-size: 12px;
+    color: #c6bebd;
+}
+
+.sent{
+    background-color: #D5F9BA;
+    margin-inline-start: auto;
 }

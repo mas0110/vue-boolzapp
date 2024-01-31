@@ -179,10 +179,11 @@ createApp({
             }
         ],
             
-            currentName:"Boolzapp",
+            currentName:'Boolzapp',
             currentImg:[],
+            activeChat: 0,
+            newMex:"",
             currentChat:"",
-            newMex:[],
         }
     },
     created(){
@@ -192,14 +193,19 @@ createApp({
         changeChat(index){
             this.currentName = this.amici[index].name
             this.currentImg = this.amici[index].avatar
-            this.currentChat = this.messages[index].messege
+            // this.currentChat = this.amici[index].messages
+            // this.activeChat = 0
+            this.activeChat = index
             console.log(this.currentName)
+            console.log()
+            // console.log(this.currentChat)
+            // this.currentChat = this.amici[index].messages[index].message
+            // console.log(newMex)
         },
-        addMex(){
-            if(this.newMex !== ''){
-                this.tasks.push(this.newTask.text)
-            }
-            this.newMex = ''
-        }
+        addMex(index){
+        },
+        // Chat(index){
+            // this.activeChat = 4
+        // }
     },
 }).mount('#app')
