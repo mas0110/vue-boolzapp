@@ -46,36 +46,47 @@
                         </div>
                         <div>
                             <div> Ricevi notifiche di nuovi messaggi</div>
-                            <div>Attiva notifiche desktop</div>
+                           <a href="">Attiva notifiche desktop</a>
                         </div>
                     </div>
                     <!-- input di ricerca -->
-                    <div class="input-group mb-3 p-2" style="background-color: #EAEAEA;">
+                    <div class="input-group p-2" style="background-color: #EAEAEA;">
                         <span class="input-group-text" id="basic-addon1"><i
                                 class="fa-solid fa-magnifying-glass"></i></span>
                         <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat"
-                            aria-label="Newchat" aria-describedby="basic-addon1">
+                            aria-label="Newchat" aria-describedby="basic-addon1" v-model="searchtext"
+                            @keyup="searchContact">
                     </div>
                     <!-- lista di contatti  -->
-                    <div v-for="(element, index) in amici" :key="index"
-                        class=" d-flex  gap-2 border-bottom overflow-scroll" @click="changeChat(index)">
-                        <figure>
-                            <img :src="amici[index].avatar" alt="">
-                        </figure>
-                        <div>
-                            <span>{{ amici[index].name}}</span>
-                            <p class="ultimo-mex">Ultimo messaggio inviato</p>
+                    <div class="contatti-container">
+                        <div v-for="(element, index) in amici" :key="index" class="lista-amici "
+                            @click="changeChat(index)"
+                            :class="element.visible ? 'd-flex  gap-2 border-bottom overflow-scroll position-relative py-1' : '' "
+                            v-show="element.visible">
+                            <figure>
+                                <img :src="amici[index].avatar" alt="">
+                            </figure>
+                            <div>
+                                <span>{{ amici[index].name}}</span>
+                                <p class="ultimo-mex">{{ element.messages[element.messages.length - 1].message }}</p>
+                            </div>
+                            <span class="ultima-data">
+                                {{ element.messages[element.messages.length - 1].date }}
+                            </span>
                         </div>
                     </div>
                 </div>
-                <div class="col-8 d-flex flex-column p-0">
+                <div class="chat-container col-8 d-flex flex-column p-0">
                     <!-- barra chat corrente  -->
                     <div class="d-flex justify-content-between p-1 px-3" style="background-color: #EAEAEA;">
                         <div class="d-flex gap-2 align-items-center">
                             <img :src="currentImg" alt="img-profilo" class="rounded-circle">
-                            <span class="">
-                                {{ currentName }}
-                            </span>
+                            <div>
+                                <span class="">
+                                    {{ currentName }}
+                                </span>
+                                <p class="ultimo-accesso">Ultimo accesso oggi alle 12:00</p>
+                            </div>
                         </div>
                         <div class="d-flex gap-2 align-middle pt-3">
                             <i class="fa-solid fa-magnifying-glass"></i>
@@ -84,32 +95,24 @@
                         </div>
                     </div>
                     <!-- chat corrente -->
-                    <div class=" container chat">
-                        <div v-for="(element, index) in amici[activeChat].messages"
-                            :key="index"
+                    <div class="chat">
+                        <div v-for="(element, index) in amici[activeChat].messages" :key="index"
                             class="p-3 rounded position-relative mt-4"
                             :class="(element.status === 'sent') ? 'sent' : 'received bg-light' ">
-                            <p class="m-0">
+                            <p class="mb-2">
                                 {{element.message}}
                             </p>
-                            <span>
+                            <span class="date">
                                 {{element.date}}
                             </span>
+                            <i class="fa-solid fa-chevron-down"></i>
                         </div>
-                        <!-- <div class="received bg-light p-3 rounded position-relative"> -->
-                        <!-- <p class="m-0"> -->
-                        <!-- {{currentChat}} -->
-                        <!-- </p> -->
-                        <!-- <span> -->
-                        <!-- 15:00 -->
-                        <!-- </span> -->
-                        <!-- </div> -->
                     </div>
                     <!-- barra messaggio nuovo -->
                     <div class="d-flex flex-row gap-3 p-3" style="background-color: #F3EEEA;">
                         <i class="fa-regular fa-face-smile pt-2"></i>
                         <input type="text" class="form-control" placeholder="Scrivi un messaggio" aria-label="messaggio"
-                            v-model="newMex" @keyUp.enter="addMex">
+                            v-model="newMessage" @keyUp.enter="addMex">
                         <i class="fa-solid fa-microphone pt-2"></i>
                     </div>
                 </div>

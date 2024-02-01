@@ -6,6 +6,7 @@ createApp({
     data() {
         return {
             amici: [{
+
                 name: 'Michele',
                 avatar: './img/avatar_1.jpg',
                 visible: true,
@@ -176,14 +177,17 @@ createApp({
                         status: 'received'
                     }
                 ],
-            }
+            },
         ],
-            
-            currentName:'Boolzapp',
-            currentImg:[],
+
+            answer:["si","ok","va bene","No","come vuoi",],
+            currentName:'Michele',
+            currentImg: "./img/avatar_1.jpg",
             activeChat: 0,
-            newMex:"",
+            newMex:[],
             currentChat:"",
+            searchtext:'',
+
         }
     },
     created(){
@@ -193,19 +197,43 @@ createApp({
         changeChat(index){
             this.currentName = this.amici[index].name
             this.currentImg = this.amici[index].avatar
-            // this.currentChat = this.amici[index].messages
-            // this.activeChat = 0
             this.activeChat = index
             console.log(this.currentName)
-            console.log()
-            // console.log(this.currentChat)
-            // this.currentChat = this.amici[index].messages[index].message
-            // console.log(newMex)
+            console.log(this.numeroCasuale)
         },
-        addMex(index){
+        addMex(){
+            if (this.newMessage !== '') {
+                this.amici[this.activeChat].messages.push({
+                  date: new Date().toLocaleString(),
+                  message: this.newMessage,
+                  status: 'sent',
+                });
+                this.newMessage = ''
+            }
+            setTimeout(() =>{
+                if (this.amici[this.activeChat].messages.push !== '') {
+                    this.amici[this.activeChat].messages.push({
+                      date: new Date().toLocaleString(),
+                      message: this.getRandomAnswer(),
+                      status: "received",
+                    });
+                };
+            },1000);
         },
-        // Chat(index){
-            // this.activeChat = 4
-        // }
+        getRandomAnswer() {
+            const randomIndex = Math.floor(Math.random() * this.answer.length);
+            return this.answer[randomIndex];
+        },
+        searchContact(){
+
+            this.amici.forEach(element => {
+                if(element.name.toLowerCase().includes( this.searchtext.toLowerCase () )){
+                    element.visible = true;
+                }else{
+                    element.visible = false;
+                }
+            });
+        },
+
     },
 }).mount('#app')
