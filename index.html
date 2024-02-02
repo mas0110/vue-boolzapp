@@ -50,7 +50,7 @@
                         </div>
                     </div>
                     <!-- input di ricerca -->
-                    <div class="input-group p-2" style="background-color: #EAEAEA;">
+                    <div class="input-group px-1" style="background-color: #EAEAEA;">
                         <span class="input-group-text" id="basic-addon1"><i
                                 class="fa-solid fa-magnifying-glass"></i></span>
                         <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat"
@@ -58,7 +58,7 @@
                             @keyup="searchContact">
                     </div>
                     <!-- lista di contatti  -->
-                    <div class="contatti-container">
+                    <div class="contatti-container bg-light">
                         <div v-for="(element, index) in amici" :key="index" class="lista-amici "
                             @click="changeChat(index)"
                             :class="element.visible ? ' d-flex  gap-2 border-bottom overflow-scroll position-relative py-1' : '' "
@@ -113,7 +113,7 @@
                         </div>
                     </div>
                     <!-- barra messaggio nuovo -->
-                    <div class="d-flex flex-row gap-3 p-3" style="background-color: #F3EEEA;">
+                    <div class="d-flex flex-row gap-3 p-3 overflow-scroll" style="background-color: #F3EEEA;">
                         <i class="fa-regular fa-face-smile pt-2"></i>
                         <input type="text" class="form-control" placeholder="Scrivi un messaggio" aria-label="messaggio"
                             v-model="newMessage" @keyUp.enter="addMex">

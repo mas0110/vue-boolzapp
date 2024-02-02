@@ -103,3 +103,7 @@ i{
     right: 5px;
     bottom: 5px;
 }
+
+.lista-amici:active{
+    background-color: #EAEAEA;
+}
