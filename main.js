@@ -187,6 +187,9 @@ createApp({
             newMex:[],
             currentChat:"",
             searchtext:'',
+            showPopup: false,
+            excludedIndex: null,
+            newMessage: "",
 
         }
     },
@@ -199,7 +202,6 @@ createApp({
             this.currentImg = this.amici[index].avatar
             this.activeChat = index
             console.log(this.currentName)
-            console.log(this.numeroCasuale)
         },
         addMex(){
             if (this.newMessage !== '') {
@@ -234,6 +236,17 @@ createApp({
                 }
             });
         },
-
+        togglePopup(index){
+            this.showPopup = !this.showPopup;
+            this.excludedIndex = index;
+        },
+        deleteMex(index){
+            this.amici.forEach(element => {
+                if (index >= 0 && index < element.messages.length) {
+                    element.messages.splice(index, 1);
+                }
+                this.showPopup = false;
+              });
+        }
     },
 }).mount('#app')

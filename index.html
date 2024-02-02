@@ -46,7 +46,7 @@
                         </div>
                         <div>
                             <div> Ricevi notifiche di nuovi messaggi</div>
-                           <a href="">Attiva notifiche desktop</a>
+                            <a href="">Attiva notifiche desktop</a>
                         </div>
                     </div>
                     <!-- input di ricerca -->
@@ -61,8 +61,8 @@
                     <div class="contatti-container">
                         <div v-for="(element, index) in amici" :key="index" class="lista-amici "
                             @click="changeChat(index)"
-                            :class="element.visible ? 'd-flex  gap-2 border-bottom overflow-scroll position-relative py-1' : '' "
-                            v-show="element.visible">
+                            :class="element.visible ? ' d-flex  gap-2 border-bottom overflow-scroll position-relative py-1' : '' "
+                            @click="changeColor" v-show="element.visible">
                             <figure>
                                 <img :src="amici[index].avatar" alt="">
                             </figure>
@@ -105,7 +105,11 @@
                             <span class="date">
                                 {{element.date}}
                             </span>
-                            <i class="fa-solid fa-chevron-down"></i>
+                            <i class="fa-solid fa-chevron-down" @click="togglePopup(index)"></i>
+                            <div class="popUp rounded" v-if="showPopup && index === excludedIndex">
+                                <div >info messaggio</div>
+                                <div class="btn" @click="deleteMex(index)">delete</div>
+                            </div>
                         </div>
                     </div>
                     <!-- barra messaggio nuovo -->
